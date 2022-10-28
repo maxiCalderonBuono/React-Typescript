@@ -3,6 +3,8 @@ import "./App.css";
 import Form from "./components/Form";
 import List from "./components/List";
 import { Sub, SubsFromApi } from "../types";
+import axios from "axios";
+import { getAllSubs } from "./services/getAllSubs";
 
 interface AppState {
   subs: Sub[];
@@ -19,28 +21,7 @@ function App() {
   };
 
   useEffect(() => {
-    const fetchSubs = (): Promise<SubsFromApi> => {
-      return fetch("http://localhost:3000/users").then((res) => res.json());
-    };
-
-    const mapSubsFromApi = (apiSubs: SubsFromApi): Array<Sub> => {
-      return apiSubs.map((apiSub) => {
-        const {
-          nickname,
-          month: monthSubs,
-          profileURL: avatar,
-          description,
-        } = apiSub;
-        return {
-          nickname,
-          monthSubs,
-          avatar,
-          description,
-        };
-      });
-    };
-
-    fetchSubs().then(mapSubsFromApi).then(setSubs);
+    getAllSubs().then(setSubs);
   }, []);
 
   return (
