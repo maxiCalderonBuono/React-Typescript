@@ -4,3 +4,12 @@ export interface Sub  {
   monthSubs: number;
   description?: string;
 }
+
+
+export type SubsFromApi  = Array<{
+     id:number;
+     nickname: string;
+     month: number;
+     profileURL: string;
+     description?: string
+}>
