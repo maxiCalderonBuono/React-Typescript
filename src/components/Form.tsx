@@ -1,17 +1,28 @@
-import {useState} from 'react'
+import React, {useState} from 'react'
+import {Sub} from '../../types'
 
-const Form = () => {
+interface FormState {
+    inputValues: Sub
+}
 
+interface FormProps {
+    onSub: (newSub: Sub) => void }
 
- const [inputValues, setinputValues] = useState({
-    nick:"",
+const Form = ({onSub}:FormProps) => {
+
+ const [inputValues, setinputValues] = useState<FormState["inputValues"]>({
+    nickname:"",
     monthSubs : 0,
     avatar: "" ,
     description: ""
 
  })
 
-  const handleSubmit =() => {
+  const handleSubmit =(e:React.FormEvent<HTMLFormElement>) => {
+
+    e.preventDefault();
+
+    onSub(inputValues)
 
   }
 
@@ -28,8 +39,8 @@ const Form = () => {
     <div>
         <form onSubmit={handleSubmit}>
             <div className="nes-field">
-  <label htmlFor="nick">Nick</label>
-  <input onChange = {handleInputChange} value={inputValues.nick} type="text" id="nick" className="nes-input" required name="nick" />
+  <label htmlFor="nickname">Nick</label>
+  <input onChange = {handleInputChange} value={inputValues.nickname} type="text" id="nickname" className="nes-input" required name="nickname" />
 </div>            
 <div className="nes-field">
   <label htmlFor="monthSubs">monthSubs</label>

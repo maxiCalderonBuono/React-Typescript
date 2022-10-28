@@ -2,15 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import Form from './components/Form';
 import List from './components/List';
-
-
-
-interface Sub  {
-  nickname: string;
-  avatar: string;
-  monthSubs: number;
-  description?: string;
-}
+import {Sub} from '../types'
 
 interface AppState {
   subs: Sub[];
@@ -36,15 +28,18 @@ const INITIAL_STATE = [
 
 function App() {
 
-
   const [subs, setSubs] = useState<AppState["subs"]>(INITIAL_STATE)
   const [newSubsNumber, setnewSubsNumber] = useState<AppState["newSubsNumber"]>(0)
+
+  const handleNewSub = (newSub: Sub): void => {
+  setSubs(subs => [...subs, newSub])
+}
 
   return (
     <div className="App">
       <h1>My Followers</h1>
         <List subs = {subs}/>
-        <Form />
+        <Form  onSub={handleNewSub}/>
     </div>
   )
 }

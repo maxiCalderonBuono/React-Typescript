@@ -1,12 +1,7 @@
-import React from 'react'
+import {Sub} from '../../types'
 
 interface Props {
-  subs: Array<{
-    nickname: string;
-  avatar: string;
-  monthSubs: number;
-  description?: string;
-  }>
+  subs: Array<Sub>
 }
 
 const List = ({subs}: Props) => {
